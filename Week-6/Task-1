@@ -1,0 +1,67 @@
+For two strings A and B, we define the similarity of the strings to be the length of the longest prefix common to both strings. For example, the similarity of strings "abc" and "abd" is 2, while the similarity of strings "aaa" and "aaab" is 3.
+
+Calculate the sum of similarities of a string S with each of it's suffixes.
+
+Input Format
+
+The first line contains the number of test cases t.
+Each of the next t lines contains a string to process, .
+
+Constraints
+
+ is composed of characters in the range ascii[a-z]
+Output Format
+
+Output t lines, each containing the answer for the corresponding test case.
+
+Sample Input
+
+2
+ababaa  
+aa
+Sample Output
+
+11  
+3
+
+program:
+
+import java.util.*;
+
+public class Main {
+
+    public static int similaritySum(String s) {
+        int n = s.length();
+        int total = 0;
+
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+
+            for (int j = 0; j < n - i; j++) {
+                if (s.charAt(j) == s.charAt(i + j)) {
+                    count++;
+                } else {
+                    break;
+                }
+            }
+
+            total += count;
+        }
+
+        return total;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < t; i++) {
+            String s = sc.nextLine();
+            System.out.println(similaritySum(s));
+        }
+
+        sc.close();
+    }
+}
