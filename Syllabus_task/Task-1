@@ -1,0 +1,44 @@
+
+Task 1:
+Given a list of integers, find the second highest number in the list using stream API. If there is no second highest number (all elements same or only one element), print -1.
+Input Format:
+First line: An integer N - the number of integers in the list.
+Second line: N space-separated integers - the elements of the list.
+Output Format:
+Print a single integer - the second highest number. Print -1 if it does not exist.
+Sample Input 1:
+5
+4 2 8 1 5
+Sample Output 1:
+5
+Sample Input 2:
+3
+5 5 5
+Sample Output 2:
+-1
+
+program:
+
+import java.util.*;
+import java.util.stream.*;
+
+public class task1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            list.add(sc.nextInt());
+        }
+
+        Optional<Integer> secondMax = list.stream()
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .skip(1)
+                .findFirst();
+
+        System.out.println(secondMax.orElse(-1));
+    }
+}
